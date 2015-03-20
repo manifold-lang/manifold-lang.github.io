@@ -1,0 +1,138 @@
+@import 'reset.css'
+
+width = 960px
+rhythm-vertical = 40px
+
+color-dark = #404040
+color-gray = #eee
+color-light = #f8f8f8
+color-blue = #bedae9
+color-grey = #a8a8a7
+color-purple = #f2daff
+color-yellow = #ffffcf
+color-green = #bae9d2
+
+// Styles
+
+link-color(color)
+  a
+    color saturate(darken(color, 80%), 80%)
+    &:hover
+      color: saturate(darken(color, 70%), 80%)
+
+body
+  font-size: 14px
+  color color-dark
+  background-color: color-light
+  font-family 'Montserrat', sans-serif
+  link-color: color-yellow
+
+p
+  margin (rhythm-vertical / 4) 0
+  line-height: 120%
+
+  &.large
+    font-size: 20px
+    line-height: 120%
+
+code
+  white-space: pre
+  color: color-gray
+  font-family: courier, mono
+  background-color: color-dark
+  padding: 50px
+  display: block
+
+  .special
+    color: color-grey
+    font-weight: bold
+
+  .definition
+    color: color-yellow
+
+  .definition-type
+    color: darken(color-yellow, 30%)
+
+  .reference
+    color: color-blue
+
+  .condition
+    font-weight: bold
+
+// Layout
+
+header
+  text-align center
+  padding-top: rhythm-vertical * 4
+  padding-bottom: rhythm-vertical * 4
+  background-image url('../images/banner.jpg')
+  background-size cover
+  background-position: top
+  position: relative
+  color: #000
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.7)
+  box-shadow 0 0 30px rgba(0, 0, 0, 0.2)
+
+  iframe
+    position: absolute
+    top: rhythm-vertical
+    right: rhythm-vertical
+    float: right
+
+  img
+    height rhythm-vertical * 6
+
+  h1
+    font-size: 100px
+    margin: (rhythm-vertical / 2) 0 0
+    line-height: 100%
+
+  p
+    font-size: 20px
+    width: 600px
+    margin: 0 auto
+
+section
+  width width
+  margin rhythm-vertical * 2 auto
+
+footer
+  text-align: center
+  color color-grey
+  margin 20px 0
+  link-color: lighten(color-yellow, 90%)
+
+section#features
+  overflow: hidden
+
+  h2
+    font-size: 23px
+
+  .row
+    overflow: hidden
+
+  section
+    width: (1/3) * width
+    box-sizing: border-box
+    float: left
+    padding (rhythm-vertical / 2)
+    margin 0
+
+section#example
+  background-color: color-dark
+  width: 100%
+
+  code
+    width: width
+    margin 0 auto
+
+section#next-steps
+  width: (width / 2)
+  font-size: 17px
+
+  h2
+    font-size: 50px
+    margin-bottom: 20px
+
+  li
+    padding: 10px 0

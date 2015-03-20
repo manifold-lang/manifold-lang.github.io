@@ -1,0 +1,138 @@
+<!doctype html>
+
+<html>
+
+  <head>
+    <title>Manifold - [more]</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' type='text/css' href='stylesheets/main.css'>
+  </head>
+
+  <body>
+
+    <header>
+      <iframe src="https://ghbtns.com/github-btn.html?user=manifold-lang&repo=manifold-frontend&type=watch&count=true&size=large&v=2" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+      <img src='images/logo.svg' alt='logo'>
+
+      <h1>Manifold</h1>
+      <p>design everything the way you design software: with an elegant formal language, reusable modules, and automated testing.</p>
+    </header>
+
+    <section id="features">
+
+      <div class="row">
+
+        <section>
+          <h2>General Language</h2>
+          <p>Manifold is very powerful and very general. We currently support digital hardware design and microfluidics design but the language itself could be generalized to many other fields of design.</p>
+        </section>
+
+        <section>
+          <h2>Reusable Modules</h2>
+          <p>Solve hard problems once and encapsulate your solution in a module. Share modules between projects, teams, and organizations.</p>
+        </section>
+
+        <section>
+          <h2>Well-Engineered Abstractions</h2>
+          <p>Build complex systems confidently and easily using well engineered abstractions. Complex implementation details are encapsulated and hidden away when they are not relevant. </p>
+        </section>
+
+      </div>
+
+      <div class="row">
+
+        <section>
+          <h2>Automated Testing and Formal Verification</h2>
+          <p>Develop systems quickly and confidently with automated testing. Easily hook into tools that allow for formal verification of designs.</p>
+        </section>
+
+        <section>
+          <h2>High-Level Langugae Features</h2>
+          <p>Use powerful features typically only found in high-level programming languages such as first class functions, inferred types, and "dynamic width" arrays </p>
+        </section>
+
+        <section>
+          <h2>Lorem Ipsum</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lorem enim, maximus in mollis pharetra, ultrices fermentum sapien. Nullam rutrum dui vitae elit vestibulum, ornare malesuada risus aliquam. Phasellus nulla eros, condimentum ac tortor ut, porttitor molestie est.</p>
+        </section>
+
+      </div>
+
+    </section>
+
+    <section id="example">
+
+      <code>
+
+        <span class="definition special">*</span> = <span class="special">import</span> <span class="reference">Manifold.core</span>
+        <span class="definition special">*</span> = <span class="special">import</span> <span class="reference">Manifold.digital</span>
+
+        <span class="definition-type">Type</span> <span class="definition">TrafficLight</span> = (
+          <span class="definition-type">Boolean</span> <span class="definition">green</span>  = <span class="special">false</span>,
+          <span class="definition-type">Boolean</span> <span class="definition">yellow</span> = <span class="special">false</span>,
+          <span class="definition-type">Boolean</span> <span class="definition">red</span>    = <span class="special">false</span>
+        )
+
+        <span class="definition">GREEN_SECONDS</span>  = <span class="special">10</span>
+        <span class="definition">YELLOW_SECONDS</span> = <span class="special">3</span>
+        <span class="definition">TOTAL_SECONDS</span>  = <span class="special">2</span> * (<span class="reference">GREEN_SECONDS</span> + <span class="reference">YELLOW_SECONDS</span>)
+
+        <span class="definition">seconds</span> = <span class="reference">Manifold.Digital.count</span>(<span class="definition">hz</span>: <span class=" special">1</span>, <span class="definition">mod</span>: <span class="reference">TOTAL_SECONDS</span>)
+
+        <span class="reference reference-invocation">Manifold.Digital.if</span>(
+          (<span class="condition"><span class="reference">seconds</span> < <span class="reference">GREEN_SECONDS</span></span>, <span class="definition-type">Void</span> -> <span class="definition-type">Void</span> {
+            <span class="definition">north_light</span> = <span class="definition">south_light</span> = (<span class="definition">green</span>: <span class="special">true</span>)
+            <span class="definition">east_light</span> = <span class="definition">west_light</span> = (<span class="definition">red</span>: <span class="special">true</span>)
+          }),
+
+          (<span class="condition"><span class="reference">seconds</span> < <span class="reference">GREEN_SECONDS</span> + <span class="reference">YELLOW_SECONDS</span></span>, <span class="definition-type">Void</span> -> <span class="definition-type">Void</span> {
+            <span class="definition">north_light</span> = <span class="definition">south_light</span> = (<span class="definition">yellow</span>: <span class="special">true</span>)
+            <span class="definition">east_light</span> = <span class="definition">west_light</span> = (<span class="definition">red</span>: <span class="special">true</span>)
+          }),
+
+          (<span class="condition"><span class="reference">seconds</span> < <span class="special">2</span> * <span class="reference">GREEN_SECONDS</span> + <span class="reference">YELLOW_SECONDS</span></span>, <span class="definition-type">Void</span> -> <span class="definition-type">Void</span> {
+            <span class="definition">north_light</span> = <span class="definition">south_light</span> = (<span class="definition">red</span>: <span class="special">true</span>)
+            <span class="definition">east_light</span> = <span class="definition">west_light</span> = (<span class="definition">green</span>: <span class="special">true</span>)
+          }),
+
+          (<span class="condition"><span class="special">true</span></span>, <span class="definition-type">Void</span> -> <span class="definition-type">Void</span> {
+            <span class="definition">north_light</span> = <span class="definition">south_light</span> = (<span class="definition">red</span>: <span class="special">true</span>)
+            <span class="definition">east_light</span> = <span class="definition">west_light</span> = (<span class="definition">yellow</span>: <span class="special">true</span>)
+          })
+        )
+
+        <span class="definition">Manifold.Digital.led</span>[<span class="special">0..3</span>]  = <span class="definition-type">TrafficLight</span> <span class="definition">north_light</span>
+        <span class="definition">Manifold.Digital.led</span>[<span class="special">6..9</span>]  = <span class="definition-type">TrafficLight</span> <span class="definition">west_light</span>
+        <span class="definition">Manifold.Digital.led</span>[<span class="special">3..6</span>]  = <span class="definition-type">TrafficLight</span> <span class="definition">south_light</span>
+        <span class="definition">Manifold.Digital.led</span>[<span class="special">9..12</span>] = <span class="definition-type">TrafficLight</span> <span class="definition">east_light</span>
+
+      </code>
+
+    </section>
+
+    <section id="next-steps">
+
+      <h2>Keep Reading</h2>
+
+      <ul>
+        <li><a href="https://github.com/manifold-lang/manifold-frontend/blob/master/README.md">Front-End Language Specification</a></li>
+        <li><a href="https://github.com/manifold-lang/manifold-frontend">Front-End Compiler</a></li>
+        <li><a href="https://github.com/manifold-lang/manifold-frontend/blob/master/README.md">Intermediate Language Specification</a></li>
+        <li><a href="https://github.com/manifold-lang/manifold-backend-digital">Digital Hardware Back-End Compiler</a></li>
+      </ul>
+
+    </section>
+
+    <footer>
+      <a href="mailto:lucas@lucaswoj.com">Contact Us</a>
+      &bull;
+      All content licenced under <a href="https://raw.githubusercontent.com/manifold-lang/manifold-frontend/master/LICENSE">GNU Public License</a>
+    </footer>
+
+    <script src='http://www.livejs.com/live.js'></script>
+
+  </body>
+
+</html>
